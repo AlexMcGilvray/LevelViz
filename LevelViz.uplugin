@@ -1,0 +1,29 @@
+{
+    "FileVersion" : 1,
+    "FriendlyName" : "LevelViz",
+    "Version" : 1,
+    "VersionName": "1.0",
+    "EngineVersion" : "4.10",
+    "Description" : "Architectural visualization kit.",
+    "Category" : "ArchViz",
+    "CreatedBy" : "Alex McGilvray",
+    "CreatedByURL" : "http://levelism.com",
+    "CanContainContent" : "true",
+	"EnabledByDefault" : true,
+
+    "Modules" :
+    [
+        {
+            "Name" : "ArchVizViewer",
+            "Type" : "Runtime",
+            "LoadingPhase" : "PreDefault"
+
+        }, 
+		{
+            "Name" : "ArchVizViewerEditor",
+            "Type" : "Editor",
+            "LoadingPhase" : "PreDefault"
+
+        } 
+    ]
+}
