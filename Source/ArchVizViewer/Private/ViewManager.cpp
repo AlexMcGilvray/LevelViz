@@ -166,13 +166,16 @@ void AViewManager::TurnOnOutlineRendering()
 	}
 	for (auto OutlineObject : PlanElements)
 	{
-		OutlineObject->SetActorHiddenInGame(false);
-		auto RenderComponent = OutlineObject->GetRootPrimitiveComponent();
-		if (RenderComponent)
+		if (OutlineObject)
 		{
-			RenderComponent->bRenderCustomDepth = true;
-			RenderComponent->bRenderInMainPass = false;
-			RenderComponent->MarkRenderStateDirty();
+			OutlineObject->SetActorHiddenInGame(false);
+			auto RenderComponent = OutlineObject->GetRootPrimitiveComponent();
+			if (RenderComponent)
+			{
+				RenderComponent->bRenderCustomDepth = true;
+				RenderComponent->bRenderInMainPass = false;
+				RenderComponent->MarkRenderStateDirty();
+			}
 		}
 	}
 }
@@ -190,13 +193,16 @@ void AViewManager::TurnOffOutlineRendering()
 	}
 	for (auto OutlineObject : PlanElements)
 	{
-		OutlineObject->SetActorHiddenInGame(false);
-		auto RenderComponent = OutlineObject->GetRootPrimitiveComponent();
-		if (RenderComponent)
+		if (OutlineObject)
 		{
-			RenderComponent->bRenderCustomDepth = false;
-			RenderComponent->bRenderInMainPass = true;
-			RenderComponent->MarkRenderStateDirty();
+			OutlineObject->SetActorHiddenInGame(false);
+			auto RenderComponent = OutlineObject->GetRootPrimitiveComponent();
+			if (RenderComponent)
+			{
+				RenderComponent->bRenderCustomDepth = false;
+				RenderComponent->bRenderInMainPass = true;
+				RenderComponent->MarkRenderStateDirty();
+			}
 		}
 	}
 	CameraSwitchToStandardPerspective();
