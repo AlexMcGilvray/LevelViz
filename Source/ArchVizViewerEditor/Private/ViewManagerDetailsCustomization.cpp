@@ -121,7 +121,7 @@ FReply FViewManagerDetailsCustomization::AddSelectedObjects()
 	{
 		for (auto SelectedObject : StrongObjects)
 		{
-			auto SelectedObjectAsStaticMesh = Cast<AStaticMeshActor>(SelectedObject);
+			auto SelectedObjectAsStaticMesh = Cast<AActor>(SelectedObject);
 			if (SelectedObjectAsStaticMesh)
 			{
 				ViewManager->PlanElements.Add(SelectedObjectAsStaticMesh);
@@ -142,7 +142,7 @@ FReply FViewManagerDetailsCustomization::RemoveSelectedObjects()
 	{
 		for (auto SelectedObject : StrongObjects)
 		{
-			auto SelectedObjectAsStaticMesh = Cast<AStaticMeshActor>(SelectedObject);
+			auto SelectedObjectAsStaticMesh = Cast<AActor>(SelectedObject);
 			if (SelectedObjectAsStaticMesh)
 			{
 				ViewManager->PlanElements.Remove(SelectedObjectAsStaticMesh);

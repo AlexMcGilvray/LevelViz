@@ -19,6 +19,6 @@ public:
 	class AViewManager * GetViewManager();
 	class AViewManager * CachedViewManager;
 
-	TArray<class AStaticMeshActor *> GetSelectedStaticMeshes(); 
+	TArray<class AActor *> GetSelectedStaticMeshes();
 
 };

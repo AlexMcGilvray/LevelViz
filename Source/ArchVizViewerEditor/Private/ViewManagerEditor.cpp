@@ -12,10 +12,10 @@ FViewManagerEditor::FViewManagerEditor()
  
 }
 
-TArray<AStaticMeshActor *> FViewManagerEditor::GetSelectedStaticMeshes()
+TArray<AActor *> FViewManagerEditor::GetSelectedStaticMeshes()
 {
-	TArray<AStaticMeshActor*> SelectedMeshes; 
-	for (TObjectIterator<AStaticMeshActor> Itr; Itr; ++Itr)
+	TArray<AActor*> SelectedMeshes;
+	for (TObjectIterator<AActor> Itr; Itr; ++Itr)
 	{
 		auto CurrentActor = *Itr;
 		if (CurrentActor->IsSelected())
@@ -87,17 +87,16 @@ FReply FViewManagerEditor::TurnOnOutlineRendering()
 	}
 	for (auto OutlineObject : ViewManager->PlanElements)
 	{
-		if (OutlineObject == nullptr)
+		if (OutlineObject)
 		{
-			break;
-		}
-		OutlineObject->SetIsTemporarilyHiddenInEditor(false);
-		auto RenderComponent = OutlineObject->GetRootPrimitiveComponent();
-		if (RenderComponent)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Adding to custom depth pass"));
-			RenderComponent->bRenderCustomDepth = true;
-			RenderComponent->bRenderInMainPass = false;
+			OutlineObject->SetIsTemporarilyHiddenInEditor(false);
+			auto RenderComponent = OutlineObject->GetRootPrimitiveComponent();
+			if (RenderComponent)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Adding to custom depth pass"));
+				RenderComponent->bRenderCustomDepth = true;
+				RenderComponent->bRenderInMainPass = false;
+			}
 		}
 	}
 
@@ -132,12 +131,15 @@ FReply FViewManagerEditor::TurnOffOutlineRendering()
 	}
 	for (auto OutlineObject : ViewManager->PlanElements)
 	{
-		OutlineObject->SetIsTemporarilyHiddenInEditor(false);
-		auto RenderComponent = OutlineObject->GetRootPrimitiveComponent();
-		if (RenderComponent)
+		if (OutlineObject)
 		{
-			RenderComponent->bRenderCustomDepth = 0;
-			RenderComponent->bRenderInMainPass = true;
+			OutlineObject->SetIsTemporarilyHiddenInEditor(false);
+			auto RenderComponent = OutlineObject->GetRootPrimitiveComponent();
+			if (RenderComponent)
+			{
+				RenderComponent->bRenderCustomDepth = 0;
+				RenderComponent->bRenderInMainPass = true;
+			}
 		}
 	}
 
@@ -157,6 +159,7 @@ void FViewManagerEditor::LaunchViewManagerEditor()
 	CachedViewManager = GetViewManager();
 	auto Window = SNew(SWindow)
 		.Title(LOCTEXT("WindowTitle", "ArchVizTools"))
+.IsTopmostWindow(true)
 		.ClientSize(FVector2D(200.0f, 600.0f))
 		.SupportsMaximize(true)
 		.SupportsMinimize(false)

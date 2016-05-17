@@ -51,7 +51,7 @@ public:
 	// The geometry that contributes to the plan view
 	// @TODO accept other types of actors besides static meshes like BSP brushes
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = ViewManagerPlans)
-	TArray<AStaticMeshActor*> PlanElements;
+	TArray<AActor*> PlanElements;
 
 	// Kicks off the camera to transition into plan view
 	UFUNCTION(BlueprintCallable, Category = ViewManagerPlans)
